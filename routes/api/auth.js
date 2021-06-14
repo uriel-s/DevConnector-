@@ -42,13 +42,14 @@ router.post(
             .status(400)
             .json({ errors: [{ msg: 'Invalid user' }] });
         }
-  
+  // math user and password with databse
+
         const isMatch = await bcrypt.compare(password, user.password);
   
         if (!isMatch) {
           return res
             .status(400)
-            .json({ errors: [{ msg: 'Invalid Credentials' }] });
+            .json({ errors: [{ msg: 'Invalid user or password' }] });
         }
   
         const payload = {
