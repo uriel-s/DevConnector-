@@ -11,7 +11,7 @@ const normalize = require('normalize-url');
 //
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-//const Post = require('../../models/Post');
+const Post = require('../../models/Post');
 
 // @route    GET api/profile/me
 // @desc     Get current users profile
@@ -115,14 +115,10 @@ router.get('/', async (req, res) => {
 // @route    GET api/profile/user/:user_id
 // @desc     Get profile by user ID
 // @access   Public
-router.get(
-  '/user/:user_id',
-  //checkObjectId('user_id'),
-  async ({ params: { user_id } }, res) => {
+router.get('/user/:user_id', async (req , res) => {
     try {
       const profile = await Profile.findOne({
-        user: user_id
-      }).populate('user', ['name', 'avatar']);
+        user: req.params.user_id}).populate('user', ['name', 'avatar']);
 
       if (!profile) return res.status(400).json({ msg: 'Profile not found' });
 
@@ -151,7 +147,7 @@ router.delete('/', auth, async (req, res) => {
     res.json({ msg: 'User deleted' });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).send('Server Error2');
   }
 });
 
