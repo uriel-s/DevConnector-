@@ -64,9 +64,6 @@ const Profile = ({ getProfileById,
               )}
             </div>
 
-            {profile.githubusername && (
-              <ProfileGithub username={profile.githubusername} />
-            )}
           </div>
         </Fragment>
       )}
